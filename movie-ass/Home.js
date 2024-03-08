@@ -119,7 +119,7 @@ return (
             </View>
             <ScrollView>
             {movie3.map((item) =>
-                   <Image key={item.id} style={{width:250,height:150,marginHorizontal:5,borderRadius:10}} source={{uri:`https://image.tmdb.org/t/p/w500/${item.poster_path}`}} />
+                   <Image key={item.id} style={{width:400,height:200,marginHorizontal:5,borderRadius:10,margin:10}} source={{uri:`https://image.tmdb.org/t/p/w500/${item.poster_path}`}} />
                    )}
             </ScrollView>
         </ScrollView>

@@ -1,8 +1,43 @@
+import React ,{useState,useEffect}from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Icon } from 'react-native-elements';
 import { Button, ScrollView, StyleSheet, Text, View,Image, Pressable } from 'react-native';
 
 export default function Action({navigation}) {
+
+
+const[movie,setmovie]=useState([])
+const [movie2,setmovie2]=useState([])
+const [movie3,setmovie3]=useState([])
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxYWIxMDBmMzY0MGM1ZDU2NDkzOTgyYjU0YmU4ZjdmOCIsInN1YiI6IjY1ZDg2ZDg2YTI4NGViMDE4NTg3ZmEyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bBG1lo4fPNahfs-ewwWV-hmmBAir7MBeqH62yweqAGo'
+  }
+};
+useEffect(()=>{
+  fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
+  .then(response => response.json())
+  .then((response)=>{
+    setmovie(response.results)
+    console.log(response.results)
+  } )
+  
+    
+  .catch(err => console.error(err));
+},[])
+
+useEffect(()=>{
+  fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+  .then(response => response.json())
+  .then((response)=>{
+    setmovie2(response.results)
+    console.log(response.results)})
+  .catch(err => console.error(err));
+},[])
+
+
   return (
     <View style={styles.container}>
         <View style={{display:'flex',flexDirection:'row',flexWrap:'wrap',padding:20,marginTop:10}} >
@@ -37,29 +72,26 @@ export default function Action({navigation}) {
         <View>
           <Text style={{color:'white',margin:8,fontSize:20}}>U.S Action Movies</Text>
          </View>
-        <ScrollView horizontal={true}>
-                <Image style={{width:250,height:150,marginHorizontal:5,borderRadius:10}}source={require('./assets/movie1.jpg')} />
-                <Image style={{width:250,height:150,marginHorizontal:5,borderRadius:10}}source={require('./assets/movie2.jpg')} />
-                <Image style={{width:250,height:150,marginHorizontal:5,borderRadius:10}}source={require('./assets/movie3.jpg')} />
-                <Image style={{width:250,height:150,marginHorizontal:5,borderRadius:10}}source={require('./assets/movie4.jpg')} />
-
+         <ScrollView horizontal={true}>
+                    {movie.map((item) =>
+                        <Image key={item.id} style={{width:250,height:150,marginHorizontal:5,borderRadius:10}} source={{uri:`https://image.tmdb.org/t/p/w500/${item.poster_path}`}} />
+                   ) }
             </ScrollView>
              <View>
             <Text style={{color:'white',margin:8,fontSize:20}}>Muvi Originals Action</Text>
              </View>
             <ScrollView horizontal={true}>
-                <Image style={{width:250,height:150,marginHorizontal:5,borderRadius:10}}source={require('./assets/movie6.jpg')} />
-                <Image style={{width:250,height:150,marginHorizontal:5,borderRadius:10}}source={require('./assets/movie7.jpg')} />
-                <Image style={{width:250,height:150,marginHorizontal:5,borderRadius:10}}source={require('./assets/movie8.jpg')} />
-                <Image style={{width:250,height:150,marginHorizontal:5,borderRadius:10}}source={require('./assets/movie4.jpg')} />
+                  {movie2.map((item) =>
+                   <Image key={item.id} style={{width:250,height:150,marginHorizontal:5,borderRadius:10}} source={{uri:`https://image.tmdb.org/t/p/w500/${item.poster_path}`}} />
+                   )}
             </ScrollView>
              <View>
           <Text style={{color:'white',margin:8,fontSize:20}}>More Movies</Text>
          </View>
-             <ScrollView>
-           <Image style={{width:300,height:150,margin:15,borderRadius:10}}source={require('./assets/movie4.jpg')} />
-           <Image style={{width:300,height:150,margin:15,borderRadius:10}}source={require('./assets/movie3.jpg')} />
-           <Image style={{width:300,height:150,margin:15,borderRadius:10}}source={require('./assets/movie8.jpg')} />
+            <ScrollView horizontal={true}>
+                    {movie.map((item) =>
+                        <Image key={item.id} style={{width:250,height:150,marginHorizontal:5,borderRadius:10}} source={{uri:`https://image.tmdb.org/t/p/w500/${item.poster_path}`}} />
+                   ) }
             </ScrollView>
            </ScrollView>
       </View>

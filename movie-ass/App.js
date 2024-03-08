@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -19,6 +20,7 @@ import SearchScreen from './Search';
 import MyList from './MyList';
 import ProfileScreen from './Profile';
 import { Icon } from 'react-native-elements';
+import { DrawerNavigation } from "./DrawerNavigation";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -59,7 +61,7 @@ const TabNavigation=()=>{
                   tabBarIcon: ()=>
                   <Icon name='search'/>  
                 }}/>
-                <Tab.Screen name='Profile' component={ProfileScreen} options={{ headerShown: false,
+                <Tab.Screen name='DrawerNavigation' component={DrawerNavigation} options={{ headerShown: false,
                   tabBarIcon: ()=>
                   <Icon name='person'/>    
                 }} />
