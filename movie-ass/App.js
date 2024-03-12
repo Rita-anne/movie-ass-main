@@ -61,7 +61,7 @@ const TabNavigation=()=>{
                   tabBarIcon: ()=>
                   <Icon name='search'/>  
                 }}/>
-                <Tab.Screen name='DrawerNavigation' component={DrawerNavigation} options={{ headerShown: false,
+                <Tab.Screen name='Profile' component={DrawerNavigation} options={{ headerShown: false,
                   tabBarIcon: ()=>
                   <Icon name='person'/>    
                 }} />
